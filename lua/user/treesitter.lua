@@ -4,9 +4,12 @@ if not status_ok then
 end
 
 configs.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  -- https://github.com/ogirginc/dotfiles/commit/3c85abd07227f9bab4398809668784e1aa03e1b1
+  -- ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
   sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
-  ignore_install = { "" }, -- List of parsers to ignore installing
+  -- ignore_install = { "" }, -- List of parsers to ignore installing
   autopairs = {
     enable = true,
   },
