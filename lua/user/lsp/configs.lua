@@ -5,7 +5,7 @@ end
 
 local lspconfig = require("lspconfig")
 
-local servers = { "jsonls", "sumneko_lua" }
+local servers = { "jsonls", "sumneko_lua" , "pyright", "clangd"}
 
 lsp_installer.setup {
 	ensure_installed = servers
@@ -16,9 +16,11 @@ for _, server in pairs(servers) do
 		on_attach = require("user.lsp.handlers").on_attach,
 		capabilities = require("user.lsp.handlers").capabilities,
 	}
-	local has_custom_opts, server_custom_opts = pcall(require, "user.lsp.settings." .. server)
-	if has_custom_opts then
-	 	opts = vim.tbl_deep_extend("force", server_custom_opts, opts)
-	end
+    if server == 'jsonls' or server == 'sumneko_lua' then
+        local has_custom_opts, server_custom_opts = pcall(require, "user.lsp.settings." .. server)
+        if has_custom_opts then
+            opts = vim.tbl_deep_extend("force", server_custom_opts, opts)
+        end
+    end
 	lspconfig[server].setup(opts)
 end

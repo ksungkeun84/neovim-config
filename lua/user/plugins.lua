@@ -97,6 +97,16 @@ return packer.startup(function(use)
   -- DirDiff
   use "will133/vim-dirdiff"
 
+  -- vimspector
+  use {
+      "puremourning/vimspector",
+      cmd = { "VimspectorInstall", "VimspectorUpdate" },
+      fn = { "vimspector#Launch()", "vimspector#ToggleBreakpoint", "vimspector#Continue" },
+      config = function()
+          require("user.vimspector").setup()
+      end,
+  }
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
